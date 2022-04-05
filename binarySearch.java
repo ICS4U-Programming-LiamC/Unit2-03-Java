@@ -4,8 +4,10 @@ import java.util.Scanner;
 
 
 /**
-* 
-* 
+* This program utilizes the binary search algorithm to
+* find a number in an array quickly. 
+* I also implimented a program to find out if that same number appears
+* at other indecies around the number that the function found.
 *
 * @author  Liam Csiffary
 * @version 1.0
@@ -63,13 +65,48 @@ public class binarySearch {
 
   // main function
   public static void main(String[] args) throws Exception {
-  
-    System.out.println("Welcome! This program finds a number in a list\n");
-    int[] arrayOfnums = new int[20];
+    // define vars
+    int lengthOfArray;
+    int maxNum;
     Random r = new Random();
+    Scanner sc = new Scanner(System.in);
+  
+    // greets the user
+    System.out.println("Welcome! This program finds a number in a list\n");
+
+    // gets the number of ints to put in the array
+    System.out.println("How many numbers would you like to have in the array? ");
+    
+    // makes sure the user inputed an int
+    while (true) {
+      try {
+        lengthOfArray = Integer.parseInt(sc.nextLine());
+        break;
+      } catch (NumberFormatException e) {
+        System.out.println("Please input an int");
+      }
+    }
+    // creates an array of that length
+    int[] arrayOfnums = new int[lengthOfArray];
+
+    // gets how big the numbers in the array should be
+    System.out.println("Up to what number should the array be populated with 0-?: ");
+    
+    // makes sure the user inputed an int
+    while (true) {
+      try {
+        maxNum = Integer.parseInt(sc.nextLine());
+        break;
+      } catch (NumberFormatException e) {
+        System.out.println("Please input an int");
+      }
+    }
+
+    // populates the array with numbers
     System.out.println("The array that we are searching through is: ");
     for (int i = 0; i < arrayOfnums.length; i++) {
-      arrayOfnums[i] = (r.nextInt(20));
+      // + 1 so that its from 1 to the users input
+      arrayOfnums[i] = (r.nextInt(maxNum) + 1);
     }
 
     // https://www.softwaretestinghelp.com/sort-arrays-in-java/
@@ -77,13 +114,18 @@ public class binarySearch {
     Arrays.sort(arrayOfnums); 
     System.out.printf("\nSorted Array : %s \n", Arrays.toString(arrayOfnums)); 
 
+    // generates a random number for the program to search for
     int numToLookFor = arrayOfnums[r.nextInt(arrayOfnums.length)];
 
+    // sends array and the numToLookFor to the searcher function
     int index = binarySearcher(arrayOfnums, numToLookFor, 0, arrayOfnums.length);
 
+    // finds all indecies arround the returned value for which the number
+    // at that index is the same
     String rangeOnIndex = isElseWhere(arrayOfnums, index);
     
+    // prints the final answer to the user
     System.out.println("The number " + numToLookFor + " appears at " + rangeOnIndex);
-
+    System.out.println("The length of the array was " + arrayOfnums.length);
   }
 }
