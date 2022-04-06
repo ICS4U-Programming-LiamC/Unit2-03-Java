@@ -24,6 +24,8 @@ public class binarySearch {
     // to look for
     if (array[mid] == i) {
       return mid;
+    } else if (right == left) {
+      return -1;
     } else if (array[mid] > i) {
       // sends the new left right to the function again changes right to be where the
       // middle was - 1
@@ -96,11 +98,15 @@ public class binarySearch {
     // gets the number of ints to put in the array
     System.out.println("How many numbers would you like to have in the array? ");
 
-    // makes sure the user inputed an int
+    // makes sure the user inputed a positive integer
     while (true) {
       try {
         lengthOfArray = Integer.parseInt(sc.nextLine());
-        break;
+        if (lengthOfArray <= 0) {
+          System.out.println("Please input an integer greater than 0");
+        } else {
+          break;
+        }
       } catch (NumberFormatException e) {
         System.out.println("Please input an int");
       }
@@ -113,7 +119,11 @@ public class binarySearch {
     while (true) {
       try {
         maxNum = Integer.parseInt(sc.nextLine());
-        break;
+        if (maxNum <= 0) {
+          System.out.println("Please input an integer greater than 0");
+        } else {
+          break;
+        }
       } catch (NumberFormatException e) {
         System.out.println("Please input an int");
       }
@@ -130,7 +140,6 @@ public class binarySearch {
     }
 
     // https://www.softwaretestinghelp.com/sort-arrays-in-java/
-    System.out.printf("Original Array : %s", Arrays.toString(arrayOfnums));
     Arrays.sort(arrayOfnums);
     System.out.printf("\nSorted Array : %s \n", Arrays.toString(arrayOfnums));
 
@@ -140,12 +149,17 @@ public class binarySearch {
     // sends array and the numToLookFor to the searcher function
     int index = binarySearcher(arrayOfnums, numToLookFor, 0, arrayOfnums.length);
 
-    // finds all indices around the returned value for which the number
-    // at that index is the same
-    String rangeOnIndex = isElseWhere(arrayOfnums, index);
+    // if the number was not in the array
+    if (index == -1) {
+      System.out.println("The number " + numToLookFor + " does not appear in the array");
+    } else {
+      // finds all indices around the returned value for which the number
+      // at that index is the same
+      String rangeOnIndex = isElseWhere(arrayOfnums, index);
 
-    // prints the final answer to the user
-    System.out.println("The number " + numToLookFor + " appears at " + rangeOnIndex);
-    System.out.println("The length of the array was " + arrayOfnums.length);
+      // prints the final answer to the user
+      System.out.println("The number " + numToLookFor + " appears at " + rangeOnIndex);
+      System.out.println("The length of the array was " + arrayOfnums.length);
+    }
   }
 }
