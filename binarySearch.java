@@ -1,39 +1,53 @@
-import java.util.Arrays; 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-
 /**
-* This program utilizes the binary search algorithm to
-* find a number in an array quickly. 
-* I also implimented a program to find out if that same number appears
-* at other indecies around the number that the function found.
-*
-* @author  Liam Csiffary
-* @version 1.0
-* @since   2022-04-04
-*/
+ * This program utilizes the binary search algorithm to
+ * find a number in an array quickly.
+ * I also implimented a program to find out if that same number appears
+ * at other indecies around the number that the function found.
+ *
+ * @author Liam Csiffary
+ * @version 1.0
+ * @since 2022-04-04
+ */
 
 public class binarySearch {
 
   // the function which calculates the factorial
   public static int binarySearcher(int[] array, int i, int left, int right) {
+    // defines the middle index of the remaining search range
     int mid = (right - left) / 2 + left;
+
+    // determines whether i is correct, or if it is greater or less than the number
+    // to look for
     if (array[mid] == i) {
       return mid;
     } else if (array[mid] > i) {
+      // sends the new left right to the function again chenges right to be where the
+      // middle was - 1
       return binarySearcher(array, i, left, mid - 1);
     } else {
+      // does the same as the last one but with left and + 1
       return binarySearcher(array, i, mid + 1, right);
     }
   }
 
+  // this function finds all other occurences of the
+  // number left or right of the number
+  // that the binarySearcher found
   public static String isElseWhere(int[] array, int initIndex) {
+    // gets the number the function should be looking for
     int numToLookFor = array[initIndex];
     int curNum = numToLookFor;
     int counter = 0;
+    
+    // these are the strings that we will pass back to the function
     String range1 = "";
     String range2 = "";
+    
+    // finds the numbers to the left of the initial index
     try {
       while (curNum == numToLookFor) {
         counter++;
@@ -41,9 +55,11 @@ public class binarySearch {
       }
       range1 += (initIndex - counter + 1);
     } catch (Exception e) {
+      // if it goes out of bounds then the range should be 0
       range1 += "0";
     }
 
+    // finds all numbers o the right of the index
     try {
       curNum = numToLookFor;
       counter = 0;
@@ -53,12 +69,15 @@ public class binarySearch {
       }
       range2 += (initIndex + counter - 1);
     } catch (Exception e) {
+      // if it goes out of bounds to the right
       range2 += array.length;
     }
 
+    // if range1 != range2 then return the new range of that number
     if (!range1.equals(range2)) {
       return "indecies " + range1 + "-" + range2;
     } else {
+      // otherwise return the initial index
       return "index " + range1;
     }
   }
@@ -70,13 +89,13 @@ public class binarySearch {
     int maxNum;
     Random r = new Random();
     Scanner sc = new Scanner(System.in);
-  
+
     // greets the user
     System.out.println("Welcome! This program finds a number in a list\n");
 
     // gets the number of ints to put in the array
     System.out.println("How many numbers would you like to have in the array? ");
-    
+
     // makes sure the user inputed an int
     while (true) {
       try {
@@ -91,7 +110,7 @@ public class binarySearch {
 
     // gets how big the numbers in the array should be
     System.out.println("Up to what number should the array be populated with 0-?: ");
-    
+
     // makes sure the user inputed an int
     while (true) {
       try {
@@ -110,9 +129,9 @@ public class binarySearch {
     }
 
     // https://www.softwaretestinghelp.com/sort-arrays-in-java/
-    System.out.printf("Original Array : %s", Arrays.toString(arrayOfnums)); 
-    Arrays.sort(arrayOfnums); 
-    System.out.printf("\nSorted Array : %s \n", Arrays.toString(arrayOfnums)); 
+    System.out.printf("Original Array : %s", Arrays.toString(arrayOfnums));
+    Arrays.sort(arrayOfnums);
+    System.out.printf("\nSorted Array : %s \n", Arrays.toString(arrayOfnums));
 
     // generates a random number for the program to search for
     int numToLookFor = arrayOfnums[r.nextInt(arrayOfnums.length)];
@@ -123,7 +142,7 @@ public class binarySearch {
     // finds all indecies arround the returned value for which the number
     // at that index is the same
     String rangeOnIndex = isElseWhere(arrayOfnums, index);
-    
+
     // prints the final answer to the user
     System.out.println("The number " + numToLookFor + " appears at " + rangeOnIndex);
     System.out.println("The length of the array was " + arrayOfnums.length);
