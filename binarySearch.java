@@ -5,8 +5,8 @@ import java.util.Scanner;
 /**
  * This program utilizes the binary search algorithm to
  * find a number in an array quickly.
- * I also implimented a program to find out if that same number appears
- * at other indecies around the number that the function found.
+ * I also implemented a program to find out if that same number appears
+ * at other indices around the number that the function found.
  *
  * @author Liam Csiffary
  * @version 1.0
@@ -25,7 +25,7 @@ public class binarySearch {
     if (array[mid] == i) {
       return mid;
     } else if (array[mid] > i) {
-      // sends the new left right to the function again chenges right to be where the
+      // sends the new left right to the function again changes right to be where the
       // middle was - 1
       return binarySearcher(array, i, left, mid - 1);
     } else {
@@ -34,7 +34,7 @@ public class binarySearch {
     }
   }
 
-  // this function finds all other occurences of the
+  // this function finds all other occurrences of the
   // number left or right of the number
   // that the binarySearcher found
   public static String isElseWhere(int[] array, int initIndex) {
@@ -42,11 +42,11 @@ public class binarySearch {
     int numToLookFor = array[initIndex];
     int curNum = numToLookFor;
     int counter = 0;
-    
+
     // these are the strings that we will pass back to the function
     String range1 = "";
     String range2 = "";
-    
+
     // finds the numbers to the left of the initial index
     try {
       while (curNum == numToLookFor) {
@@ -75,7 +75,7 @@ public class binarySearch {
 
     // if range1 != range2 then return the new range of that number
     if (!range1.equals(range2)) {
-      return "indecies " + range1 + "-" + range2;
+      return "indices " + range1 + "-" + range2;
     } else {
       // otherwise return the initial index
       return "index " + range1;
@@ -140,7 +140,7 @@ public class binarySearch {
     // sends array and the numToLookFor to the searcher function
     int index = binarySearcher(arrayOfnums, numToLookFor, 0, arrayOfnums.length);
 
-    // finds all indecies arround the returned value for which the number
+    // finds all indices around the returned value for which the number
     // at that index is the same
     String rangeOnIndex = isElseWhere(arrayOfnums, index);
 
