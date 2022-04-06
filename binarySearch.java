@@ -105,8 +105,6 @@ public class binarySearch {
         System.out.println("Please input an int");
       }
     }
-    // creates an array of that length
-    int[] arrayOfnums = new int[lengthOfArray];
 
     // gets how big the numbers in the array should be
     System.out.println("Up to what number should the array be populated with 0-?: ");
@@ -120,6 +118,9 @@ public class binarySearch {
         System.out.println("Please input an int");
       }
     }
+
+    // creates an array of the length that the user inputed
+    int[] arrayOfnums = new int[lengthOfArray];
 
     // populates the array with numbers
     System.out.println("The array that we are searching through is: ");
