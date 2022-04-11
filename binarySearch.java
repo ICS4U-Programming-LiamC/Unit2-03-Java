@@ -13,19 +13,21 @@ import java.util.Scanner;
  * @since 2022-04-04
  */
 
-public class binarySearch {
+public class BinarySearch {
 
   // the function which calculates the factorial
   public static int binarySearcher(int[] array, int i, int left, int right) {
     // defines the middle index of the remaining search range
-    int mid = (right - left) / 2 + left;
+    int mid = ((right - left) / 2) + left;
+    System.out.println(left + " " + mid + " " + right);
 
-    // determines whether i is correct, or if it is greater or less than the number
+    // determines whether right == left or if left has gotten bigger than right
+    // also determines if i is correct, or if it is greater or less than the number
     // to look for
-    if (array[mid] == i) {
-      return mid;
-    } else if (right == left) {
+    if (right <= left) {
       return -1;
+    } else if (array[mid] == i) {
+      return mid;
     } else if (array[mid] > i) {
       // sends the new left right to the function again changes right to be where the
       // middle was - 1
@@ -144,7 +146,7 @@ public class binarySearch {
     System.out.printf("\nSorted Array : %s \n", Arrays.toString(arrayOfnums));
 
     // generates a random number for the program to search for
-    int numToLookFor = arrayOfnums[r.nextInt(arrayOfnums.length)];
+    int numToLookFor = r.nextInt(maxNum);
 
     // sends array and the numToLookFor to the searcher function
     int index = binarySearcher(arrayOfnums, numToLookFor, 0, arrayOfnums.length);
